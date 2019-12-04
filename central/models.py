@@ -42,5 +42,3 @@ class Squirrel(models.Model):
     class Meta:
         verbose_name_plural = "Squirrel"
 
-    def __str__(self):
-        return self.uniqueID

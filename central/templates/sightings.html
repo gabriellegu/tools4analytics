@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+	<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+	<script>
+		function on_update(event,th) {
+			 var data_object_id=$(th).attr('data-object-id');
+			 event.preventDefault();
+			 $.ajax({
+				   type: "POST",
+				   url: "/sightings/updatetemp",
+				   contentType:"application/json",
+				   data:{id:data_object_id},
+				   dataType:"json",
+				   success: function(result){
+						if(result.code==2){
+							window.location.href="/sightings/update?uniqueID="+data_object_id;
+					   }
+				   },
+				   error: function(result){
+					   alert('Error in updating')
+				   }
+				});
+		}
+		$(function() {
+			$('#del').on('click', function(){
+				var confirmation = confirm("Are you sure you want to remove the item?");
+				if (confirmation) {
+					let object_id = $(this).attr('data-object-id');
+					let url1 = 'sightings/'+object_id+'/';
+					$.ajax({
+						url: url1,
+						data: {
+							'csrfmiddlewaretoken': "{{ csrf_token }}"
+						},
+						type: "DELETE",
+						dataType: "json",
+						success: function(result){
+							if (result.code==1){
+								alert('Success in deleting');
+								window.location.href="/sightings"
+							}
+						}
+					})
+				}
+			});
+		});
+
+
+	</script>
+	<title>Sightings</title>
+
+</head>
+<style>
+	.table th, .table td {
+		text-align: center;
+	}
+
+</style>
+
+<body>
+<p></p>
+
+<div class="container">
+	<form action="/query" method="get" role="form">
+		<div class="form-inline">
+			<label class="control-label">uniqueID: &nbsp</label><input class="form-control" type="text" name="uniqueID"
+																	   placeholder="Enter id"/>
+			<input type="submit" id="queryById" value="Search" class="btn btn-default "/>
+			&nbsp&nbsp<a href="/sightings/add" class="btn btn-primary">Add</a>
+			&nbsp&nbsp&nbsp
+		</div>
+	</form>
+	<p></p>
+	<table class="table table-bordered" >
+		<thead>
+		<tr>
+			<th>loc_X</th>
+			<th>loc_Y</th>
+			<th>UniqueID</th>
+			<th>hectare</th>
+			<th>shift</th>
+			<th>date</th>
+			<th>hectareNum</th>
+			<th>age</th>
+			<th>primaryColor</th>
+			<th>highlightColor</th>
+			<th>combiColor</th>
+			<th>colorNotes</th>
+			<th>location</th>
+			<th>measurement</th>
+			<th>specificLocation</th>
+			<th>running</th>
+			<th>chasing</th>
+			<th>climbing</th>
+			<th>eating</th>
+			<th>foraging</th>
+			<th>otherActivities</th>
+			<th>kuks</th>
+			<th>quaas</th>
+			<th>moans</th>
+			<th>tailFlags</th>
+			<th>tailTwitches</th>
+			<th>approaches</th>
+			<th>indifferent</th>
+			<th>runsFrom</th>
+			<th>otherInteractions</th>
+			<th>latLong</th>
+			<th>zipcodes</th>
+			<th>communityDistricts</th>
+			<th>boroughBoundaries</th>
+			<th>cityCouncilDistricts</th>
+			<th>policePrecincts</th>
+			<th>Operations</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for d in data %}
+
+			<tr {% if forloop.counter|divisibleby:"2" %} class="active"
+			{% else %} class="success"  {% endif %}  >
+				<td>{{ d.loc_X }}</td>
+				<td>{{ d.loc_Y }}</td>
+				<td>{{ d.uniqueID }}</td>
+				<td>{{ d.hectare }}</td>
+				<td>{{ d.shift }}</td>
+				<td>{{ d.date }}</td>
+				<td>{{ d.hectareNum }}</td>
+				<td>{{ d.age }}</td>
+				<td>{{ d.primaryColor }}</td>
+				<td>{{ d.highlightColor }}</td>
+				<td>{{ d.combiColor }}</td>
+				<td>{{ d.colorNotes }}</td>
+				<td>{{ d.location }}</td>
+				<td>{{ d.measurement }}</td>
+				<td>{{ d.specificLocation }}</td>
+				<td>{{ d.running }}</td>
+				<td>{{ d.chasing }}</td>
+				<td>{{ d.climbing }}</td>
+				<td>{{ d.eating }}</td>
+				<td>{{ d.foraging }}</td>
+				<td>{{ d.otherActivities }}</td>
+				<td>{{ d.kuks }}</td>
+				<td>{{ d.quaas }}</td>
+				<td>{{ d.moans }}</td>
+				<td>{{ d.tailFlags }}</td>
+				<td>{{ d.tailTwitches }}</td>
+				<td>{{ d.approaches }}</td>
+				<td>{{ d.indifferent }}</td>
+				<td>{{ d.runsFrom }}</td>
+				<td>{{ d.otherInteractions }}</td>
+				<td>{{ d.latLong }}</td>
+				<td>{{ d.zipcodes }}</td>
+				<td>{{ d.communityDistricts }}</td>
+				<td>{{ d.boroughBoundaries }}</td>
+				<td>{{ d.cityCouncilDistricts }}</td>
+				<td>{{ d.policePrecincts }}</td>
+				<td>&nbsp
+					<a class="text-danger" id="del" data-object-id="{{ d.uniqueID }}" href="#">Delete</a>&nbsp&nbsp
+					<a class="text-danger-2"  onclick="on_update(event,this)" id="show" data-object-id="{{ d.uniqueID }}" href='#'>Update</a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+
+	</table>
+	<p>
+		{% if data.has_previous %}
+			<a href="?page={{ data.previous_page_number }}">Prev</a>
+		{% endif %}
+		{# data.paginator.number_pages Total Pages #}
+		Page {{ data.number }} | Total {{ data.paginator.num_pages }}
+		{% if data.has_next %}
+			<a href="?page={{ data.next_page_number }}">Next</a>
+		{% endif %}
+	</p>
+
+</div>
+</body>
+</html>
+

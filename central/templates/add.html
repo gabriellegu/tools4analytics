@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap-validator/bootstrapValidator.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-validator/bootstrapValidator.js' %}"></script>
+
+    <title>Add Sightings</title>
+    <script>
+        $(document).ready(function () {
+            $('#defaultForm').bootstrapValidator({
+                message: 'This value is not valid',
+                excluded: ':disabled',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    loc_X: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+
+                        }
+                    },
+                    loc_Y: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+                        }
+                    },
+                    hectare: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp:{
+                                regexp: /^\d{2}[A-Z]+$/,
+                                message: 'Hectare can only contain 2 numbers followed with an alphabet'
+                            },
+                        }
+                    },
+                    shift: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    date: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty',
+                            },
+                            regexp: {
+                                regexp: /^[0,1]\d[0-3]\d{5}$/,
+                                message: 'Date format : MMDDYYYY'
+                            }
+                        }
+                    },
+                    hectareNum: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+                        }
+                    },
+                    highlightColor: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^[a-zA-Z,]+$/,
+                                message: 'Can only consist of words, separated with comma'
+                            }
+                        }
+                    },
+                    combiColor: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^[a-zA-Z,+]+$/,
+                                message: 'Can only consist of words, separated with comma or +'
+                            },
+                        }
+                    },
+                    measurement: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^(FALSE|[0-9])+$/,
+                                message: 'Can only consist of FALSE or a number'
+                            }
+                        }
+                    },
+                    running: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    chasing: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    climbing: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    eating: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    foraging: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    kuks: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    quaas: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    moans: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    tailFlags: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    tailTwitches: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    approaches: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    indifferent: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },
+                    runsFrom: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        }
+                    },         
+                }
+            }).on('success.form.bv', function (e) {
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <form action="" method="post" role="form" id="defaultForm">
+        <div class="form-group">
+            <label class="control-label">loc_X:&nbsp </label>
+            <input class="form-control" type="text" name="loc_X" placeholder="Enter loc_X"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">loc_Y:&nbsp </label>
+            <input class="form-control" type="text" name="loc_Y" placeholder="Enter loc_Y"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectare:&nbsp </label>
+            <input class="form-control" type="text" name="hectare" placeholder="Enter hectare"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">shift:&nbsp </label>
+            <input type="radio" name="shift" value="AM"/> AM
+            <input type="radio" name="shift" value="PM"/> PM
+        </div>
+        <div class="form-group">
+            <label class="control-label">date:&nbsp </label>
+            <input class="form-control" type="text" name="date" placeholder="Enter date"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectareNum:&nbsp </label>
+            <input class="form-control" type="text" name="hectareNum" placeholder="Enter hectareNum"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">age:&nbsp </label>
+            <input type="radio" name="age" value="Adult"/> Adult
+            <input type="radio" name="age" value="Juvenile"/> Juvenile
+            <input type="radio" name="age" value=""/> Unknown
+        </div>
+        <div class="form-group">
+            <label class="control-label">primaryColor:&nbsp </label>
+            <input type="radio" name="primaryColor" value="Gray"/> Gray
+            <input type="radio" name="primaryColor" value="Cinnamon"/> Cinnamon
+            <input type="radio" name="primaryColor" value="Black"/> Black
+            <input type="radio" name="primaryColor" value=""/> Unknown
+        </div>
+        <div class="form-group">
+            <label class="control-label">highlightColor:&nbsp </label>
+            <input class="form-control" type="text" name="highlightColor" placeholder="Enter highlightColor"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">combiColor:&nbsp </label>
+            <input class="form-control" type="text" name="combiColor" placeholder="Enter combiColor"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">colorNotes:&nbsp </label>
+            <input class="form-control" type="text" name="colorNotes" placeholder="Enter colorNotes"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">location:&nbsp </label>
+            <input type="radio" name="location" value="Ground Plane"/> Ground Plane
+            <input type="radio" name="location" value="Above Ground"/> Above Ground
+            <input type="radio" name="location" value=""/> Unknown
+        </div>
+        <div class="form-group">
+            <label class="control-label">measurement:&nbsp </label>
+            <input class="form-control" type="text" name="measurement" placeholder="Enter measurement"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">specificLocation:&nbsp </label>
+            <input class="form-control" type="text" name="specificLocation" placeholder="Enter specificLocation"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">running:&nbsp </label>
+            <input type="radio" name="running" value="TRUE"/> TRUE
+            <input type="radio" name="running" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">chasing:&nbsp </label>
+            <input type="radio" name="chasing" value="TRUE"/> TRUE
+            <input type="radio" name="chasing" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">climbing:&nbsp </label>
+            <input type="radio" name="climbing" value="TRUE"/> TRUE
+            <input type="radio" name="climbing" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">eating:&nbsp </label>
+            <input type="radio" name="eating" value="TRUE"/> TRUE
+            <input type="radio" name="eating" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">foraging:&nbsp </label>
+            <input type="radio" name="foraging" value="TRUE"/> TRUE
+            <input type="radio" name="foraging" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">otherActivities:&nbsp </label>
+            <input class="form-control" type="text" name="otherActivities" placeholder="Enter otherActivities"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">kuks:&nbsp </label>
+            <input type="radio" name="kuks" value="TRUE"/> TRUE
+            <input type="radio" name="kuks" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">quaas:&nbsp </label>
+            <input type="radio" name="quaas" value="TRUE"/> TRUE
+            <input type="radio" name="quaas" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">moans:&nbsp </label>
+            <input type="radio" name="moans" value="TRUE"/> TRUE
+            <input type="radio" name="moans" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailFlags:&nbsp </label>
+            <input type="radio" name="tailFlags" value="TRUE"/> TRUE
+            <input type="radio" name="tailFlags" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailTwitches:&nbsp </label>
+            <input type="radio" name="tailTwitches" value="TRUE"/> TRUE
+            <input type="radio" name="tailTwitches" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">approaches:&nbsp </label>
+            <input type="radio" name="approaches" value="TRUE"/> TRUE
+            <input type="radio" name="approaches" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">indifferent:&nbsp </label>
+            <input type="radio" name="indifferent" value="TRUE"/> TRUE
+            <input type="radio" name="indifferent" value="FALSE"/> FALSE
+        </div>
+        <div class="form-group">
+            <label class="control-label">runsFrom:&nbsp </label>
+            <input type="radio" name="runsFrom" value="TRUE"/> TRUE
+            <input type="radio" name="runsFrom" value="FALSE"/> FALSE
+        </div>
+        <input type="submit" value="Submit" class="btn btn-default "/>
+</div>
+</form>
+</div>
+
+</body>
+</html>
