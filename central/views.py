@@ -15,6 +15,16 @@ from .models import Squirrel
 
 # Create your views here.
 def beginAdd(request):
+    """Function for adding a new sighting
+
+    Args:
+        request: request
+
+    Returns:
+        HttpResponseRedirect("/sightings") for POST,
+        render(request, 'add.html') otherwise
+
+    """
     if request.method == "POST":
         print(request.POST)
         print('Add')
@@ -24,8 +34,10 @@ def beginAdd(request):
         shift = request.POST['shift']
         date = request.POST['date']
         hectareNum = int(request.POST['hectareNum'])
-        uniqueID = (hectare[1:] if hectare[0]=='0' else hectare) + "-" + shift + "-" + date[:4] + "-" + (
-            str(hectareNum) if len(str(hectareNum)) == 2 else "0" + str(hectareNum))
+        uniqueID = (hectare[1:] if hectare[0] == '0' else hectare) \
+            + "-" + shift + "-" + date[:4] + "-" \
+            + (str(hectareNum) if len(str(hectareNum)) == 2
+                else "0" + str(hectareNum))
         age = request.POST['age']
         primaryColor = request.POST['primaryColor']
         highlightColor = request.POST['highlightColor']
@@ -101,6 +113,15 @@ def beginAdd(request):
 
 # @csrf_exempt
 def updateOnReq(request):
+    """Function for updating a sighting
+
+    Args:
+        request: request
+
+    Returns:
+        render(request, 'update.html', {'data': obj})
+
+    """
     if request.method == 'GET':
         print('Update GET')
 
@@ -108,12 +129,21 @@ def updateOnReq(request):
         print('obj', uniqueID)
         obj = Squirrel.objects.filter(uniqueID=uniqueID)
         if obj:
-            obj=obj[0]
+            obj = obj[0]
             print(obj)
             return render(request, 'update.html', {'data': obj})
 
 
 def query(request):
+    """Function for showing all sightings
+
+    Args:
+        request: request
+
+    Returns:
+        render_to_response('sightings.html', {'data': Squirrels})
+
+    """
     limit = 100
     Squirrels = Squirrel.objects.all()
     paginator = Paginator(Squirrels, limit)
@@ -128,13 +158,32 @@ def query(request):
 
 
 def queryById(request):
-    uniqueID = request.GET['uniqueID'];
+    """Function for searching a sighting with unique ID
+
+    Args:
+        request: request
+
+    Returns:
+        render_to_response('sightings.html', {'data': bb})
+
+    """
+    uniqueID = request.GET['uniqueID']
     if uniqueID == "":
         return HttpResponseRedirect("/sightings")
     bb = Squirrel.objects.filter(uniqueID=uniqueID)
     return render_to_response('sightings.html', {'data': bb})
 
+
 def fetchpage(request):
+    """Function for getting the page for updating
+
+    Args:
+        request: request
+
+    Returns:
+        JsonResponse({'code': 2})
+
+    """
     if request.method == "GET":
         pass
     elif request.method == 'POST':
@@ -144,25 +193,36 @@ def fetchpage(request):
         print('uniqueID-----', uniqueID)
         return JsonResponse({'code': 2})
 
+
 def god_view(request,uniqueID):
+    """Function for directing to update/delete 
+
+    Args:
+        request: request,uniqueID
+
+    Returns:
+        JsonResponse({'code': 2}) if POST
+        JsonResponse({'code': 1}) if DELETE
+        JsonResponse({'code': 3}) if can't find squirrel
+
+    """
     if request.method == 'DELETE':
         bb=Squirrel.objects.get(uniqueID=uniqueID)
         if bb:
             bb.delete() 
             return JsonResponse({'code': 1})
         else:
-            print('cannot find the squirrel')
+            print('cannot find Squirrel')
             return JsonResponse({'code': 3})
             
     elif request.method == 'POST':
+        tempID = request.POST['tempID']
         loc_X = request.POST['loc_X']
         loc_Y = request.POST['loc_Y']
         hectare = request.POST['hectare']
         shift = request.POST['shift']
         date = request.POST['date']
         hectareNum = request.POST['hectareNum']
-        uniqueID = (hectare[1:] if hectare[0]=='0' else hectare) + "-" + shift + "-" + date[:4] + "-" + (
-            str(hectareNum) if len(str(hectareNum)) == 2 else "0" + str(hectareNum))
         age = request.POST['age']
         primaryColor = request.POST['primaryColor']
         highlightColor = request.POST['highlightColor']
@@ -194,12 +254,50 @@ def god_view(request,uniqueID):
         policePrecincts = 13
 
         st_list = Squirrel.objects.filter(uniqueID=uniqueID)
-        print(st_list)
-        for st in st_list:
+        if st_list:
+            for st in st_list:
+                st.loc_X = loc_X
+                st.loc_Y = loc_Y
+                st.uniqueID = uniqueID
+                st.hectare = hectare
+                st.shift = shift
+                st.date = date
+                st.hectareNum = hectareNum
+                st.age = age
+                st.primaryColor = primaryColor
+                st.highlightColor = highlightColor
+                st.combiColor = combiColor
+                st.colorNotes = colorNotes
+                st.location = location
+                st.measurement = measurement
+                st.specificLocation = specificLocation
+                st.running = running
+                st.chasing = chasing
+                st.climbing = climbing
+                st.eating = eating
+                st.foraging = foraging
+                st.otherActivities = otherActivities
+                st.kuks = kuks
+                st.quaas = quaas
+                st.moans = moans
+                st.tailFlags = tailFlags
+                st.tailTwitches = tailTwitches
+                st.approaches = approaches
+                st.indifferent = indifferent
+                st.runsFrom = runsFrom
+                st.otherInteractions = otherInteractions
+                st.latLong = latLong
+                st.zipcodes = zipcodes
+                st.communityDistricts = communityDistricts
+                st.boroughBoundaries = boroughBoundaries
+                st.cityCouncilDistricts = cityCouncilDistricts
+                st.policePrecincts = policePrecincts
+                st.save()
+        else:
+            st = Squirrel()
             st.loc_X = loc_X
             st.loc_Y = loc_Y
-            st.uniqueID = hectare + "-" + shift + "-" + date[:4] + "-" + (
-            str(hectareNum) if len(str(hectareNum)) == 2 else "0" + str(hectareNum))
+            st.uniqueID = uniqueID
             st.hectare = hectare
             st.shift = shift
             st.date = date
@@ -234,6 +332,9 @@ def god_view(request,uniqueID):
             st.cityCouncilDistricts = cityCouncilDistricts
             st.policePrecincts = policePrecincts
             st.save()
+            bb=Squirrel.objects.get(uniqueID=tempID)
+            if bb:
+                bb.delete()
         return JsonResponse({'code': 2})
 
 datas = Squirrel.objects.values()

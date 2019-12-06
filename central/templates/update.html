@@ -311,7 +311,9 @@
                     }
                     let object_id = hectare + '-' + shift + '-' + date + '-' + hectareNum;
                     alert(object_id);
-                    let url1 = object_id+'/';
+                    let url1 = 'sightings/'+object_id+'/';
+                    $('#defaultForm').bootstrapValidator('validate');
+                    if ($('#defaultForm').data("bootstrapValidator").isValid()) {
                     $.ajax({
                         url: url1,
                         data: $('#defaultForm').serialize(),
@@ -323,7 +325,7 @@
                                 window.location="/sightings",true;
                             }
                         }
-                    })
+                    })}
                 }
             });
         });
@@ -447,6 +449,7 @@
         </div>
         <div class="form-group">
             <input type="hidden" name="otherInteractions" value={{ data.otherInteractions }}>
+            <input type='hidden' name="tempID" value = {{ data.uniqueID}}>
         </div>
         <input type="reset" value="Submit" class="btn btn-default " id="sub">
 

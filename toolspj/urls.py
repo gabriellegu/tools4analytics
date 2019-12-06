@@ -22,15 +22,15 @@ urlpatterns = [
     #admin
     path('admin/', admin.site.urls),
     #sightings
-    path('sightings',query,name='Show all sightings'),  
+    path('sightings', query, name='Show all sightings'),  
     #add
-    path('sightings/add',beginAdd,name='Add'), 
+    path('sightings/add', beginAdd, name='Add'), 
     #render to update.html
-    path('sightings/update',updateOnReq,name='Render to update.html'),
+    path('update', updateOnReq, name='Render to update.html'),
     #query by specific id 
-    path('query',queryById,name='Query by specific id'),
+    path('query',queryById, name='Query by specific id'),
     #return jsonresponse for ajax on submitting the update form
-    path('sightings/updatetemp',fetchpage),
+    path('sightings/updatetemp', fetchpage),
     #delete and update logics
-    path('sightings/<slug:uniqueID>/',god_view),  
+    path('sightings/<slug:uniqueID>/', god_view),  
 ]
