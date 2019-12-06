@@ -22,20 +22,25 @@ def mapping(request):
     Squirrels = Squirrel.objects.order_by('?')[:50]
     return render_to_response('map.html', {'sightings': Squirrels})
 
-def stats(request): 
-    all_squirrels = Squirrel.objects.all().count() 
-    per_adult = (Squirrel.objects.filter(age='Adult').count())/(Squirrel.objects.all().count()) * 100 
-    per_gray = (Squirrel.objects.filter(primaryColor='Gray').count())/(Squirrel.objects.all().count()) * 100
-    per_running = (Squirrel.objects.filter(running='true').count())/(Squirrel.objects.all().count()) * 100
+
+def stats(request):
+    all_squirrels = Squirrel.objects.all().count()
+    per_adult = (Squirrel.objects.filter(age='Adult').count())/
+    (Squirrel.objects.all().count()) * 100
+    per_gray = (Squirrel.objects.filter(primaryColor='Gray').count())/
+    (Squirrel.objects.all().count()) * 100
+    per_running = (Squirrel.objects.filter(running='true').count())/
+    (Squirrel.objects.all().count()) * 100
     num_moans = Squirrel.objects.filter(moans='true').count()
     num_approaches = Squirrel.objects.filter(approaches='true').count()
     bb = {'all_squirrels': all_squirrels,
-          'per_adult':per_adult,
-          'per_gray':per_gray, 
+          'per_adult': per_adult,
+          'per_gray': per_gray,
           'per_running': per_running,
-          'num_moans':num_moans,
-          'num_approaches':num_approaches} 
+          'num_moans': num_moans,
+          'num_approaches': num_approaches}
     return render_to_response('stats.html', {'bb': bb})
+
 
 def beginAdd(request):
     if request.method == "POST":
