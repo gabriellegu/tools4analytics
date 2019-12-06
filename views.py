@@ -19,11 +19,21 @@ from central.models import Squirrel
 
 # Create your views here.
 def mapping(request):
+    """Using this function,
+    user can get 50 random squirrel spots from the Squirrel database.
+    method: GET
+    format: 'map.html'
+    """
     Squirrels = Squirrel.objects.order_by('?')[:50]
     return render_to_response('map.html', {'sightings': Squirrels})
 
 
 def stats(request):
+    """Using this function,
+    user can get stats on 5 features of squirrels near Central Park
+    from the Squirrel database.
+    method: GET
+    """
     all_squirrels = Squirrel.objects.all().count()
     per_adult = (Squirrel.objects.filter(age='Adult').count())/
     (Squirrel.objects.all().count()) * 100
