@@ -4,8 +4,11 @@
 # Tools for Analytics Group Project
 
 **Group name**: Project Group 27
+
 **Team members**: Ying Gu, Yiwen Sun
+
 **UNIs**: [yg2689, ys3293]
+
 **Section:** 001
 
 ## What We've Implemented
