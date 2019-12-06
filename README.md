@@ -52,8 +52,9 @@ pip install django-leaflet
 
 ## Authors
 
-* **Ying Gu** - *management commands, update, add, delete, all sightings * - 
-* **Yiwen Sun** - *map, stats* - 
+* **Ying Gu** - * management commands, update, add, delete, all sightings * - 
+* **Yiwen Sun** - * map, stats * - 
+
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
