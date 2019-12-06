@@ -45,6 +45,10 @@ Add additional notes about how to deploy this on a live system
 * [Jquery](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [BootstrapValidator](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [SQlite](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Django Leaflet](https://rometools.github.io/rome/) - Used to generate map views:
+'''
+pip install django-leaflet
+'''
 
 ## Authors
 
