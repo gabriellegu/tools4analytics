@@ -1,16 +1,16 @@
 
 
 
-# Tools for analytics Project
+# Tools for Analytics Group Project
 
 **Group name**: Project Group 27
 **Team members**: Ying Gu, Yiwen Sun
-**UNIs**: [yg2689, ys3292]
+**UNIs**: [yg2689, ys3293]
 **Section:** 001
 
 ## What We've Implemented
 
-### Management commands
+### Management Commands
 
 We have implemented the management commands of importing CSV file and exporting to CSV file.
 
@@ -46,5 +46,5 @@ python manage.py export_squirrel_data /path/to/file.csv
 
 ## Authors
 
-* **Ying Gu** - * management commands, update, add, delete, all sightings * - 
-* **Yiwen Sun** - * map, stats * - 
+* **Ying Gu** - *management commands, update, add, delete, all sightings* - 
+* **Yiwen Sun** - *map, stats* - 
