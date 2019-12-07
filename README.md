@@ -37,13 +37,12 @@ We also implemented query by uniqueID.
  
 ## Dependencies
 
-* [Django](https://www.djangoproject.com)  2.2.7 -The Web Framework
-* [Bootstrap](https://getbootstrap.com) v4.3.1
--For styling
-* [Jquery](https://jquery.com) - 3.4.1 -Javascript Library
-* [BootstrapValidator](http://bootstrapvalidator.votintsev.ru/) v0.5.2 Used to validate from fields
-* [SQlite](https://www.sqlite.org/) 3.30.0 Database
-* [Django Leaflet](https://django-leaflet.readthedocs.io/en/latest/) - Used to generate map views
+* [Django](https://www.djangoproject.com) - 2.2.7 - The Web Framework
+* [Bootstrap](https://getbootstrap.com) - v4.3.1 - For styling
+* [Jquery](https://jquery.com) - 3.4.1 - Javascript Library
+* [BootstrapValidator](http://bootstrapvalidator.votintsev.ru/) - v0.5.2 - Used to validate from fields
+* [SQlite](https://www.sqlite.org/) - 3.30.0 - Database
+* [Django Leaflet](https://django-leaflet.readthedocs.io/en/latest/) - 1.5.1 - Used to generate map views
 
 ## Authors
 
