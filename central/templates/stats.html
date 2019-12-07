@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- jQuery -->
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <script type="text/javascript">
+        {#$(".text-danger").on("click",a_del_upd(event));#}
+        {#$(".text-danger-2").on("click",a_del_upd(event));#}
+    </script>
+    <title>Sighting Stats</title>
+</head>
+<style>
+    .table th, .table td {
+        text-align: center;
+    }
+
+</style>
+
+<body>
+<p></p>
+
+<div class="container">
+    <p></p>
+    <table class="table table-bordered" align="center">
+        <thead>
+        <tr>
+            <th>numuber of squirrels</th>
+            <th>adult squirrels (%)</th>
+            <th>gray squirrels  (%)</th>
+            <th>running squirrels (%)</th>
+            <th>number of moans</th>
+            <th>number of approaches</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ bb.all_squirrels }}</td>
+            <td>{{ bb.per_adult }}</td>
+            <td>{{ bb.per_gray }}</td>
+            <td>{{ bb.per_running }}</td>
+            <td>{{ bb.num_moans }}</td>
+            <td>{{ bb.num_approaches }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

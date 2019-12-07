@@ -1,16 +1,19 @@
 
 
 
-# Tools for analytics Project
+# Tools for Analytics Group Project
 
 **Group name**: Project Group 27
+
 **Team members**: Ying Gu, Yiwen Sun
-**UNIs**: [yg2689, ys3292]
+
+**UNIs**: [yg2689, ys3293]
+
 **Section:** 001
 
-## What we've implemented
+## What We've Implemented
 
-### Management commands
+### Management Commands
 
 We have implemented the management commands of importing CSV file and exporting to CSV file.
 
@@ -26,18 +29,15 @@ python manage.py export_squirrel_data /path/to/file.csv
 ## Views
 
  **/map**
+ 
  **/sightings**
  
  **/sightings/(unique-squirrel-id)**
+ 
  **/sighintgs/add**
+ 
  **/sightings/stats**
  
-Add additional notes about how to deploy this on a live system
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Dependencies
 
 * [Django](https://maven.apache.org/) - Dependency Management
@@ -45,13 +45,9 @@ Add additional notes about how to deploy this on a live system
 * [Jquery](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [BootstrapValidator](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [SQlite](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Django Leaflet](https://django-leaflet.readthedocs.io/en/latest/) - Used to generate map views
 
 ## Authors
 
-* **Ying Gu** - *management commands, update, add, delete, all sightings * - 
+* **Ying Gu** - *management commands, update, add, delete, all sightings* - 
 * **Yiwen Sun** - *map, stats* - 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc

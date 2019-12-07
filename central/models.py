@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Squirrel(models.Model):
+    """In this class, 
+    we set and define dataset attributes to create the Squirrel database.
+    """
     loc_X = models.FloatField()
     loc_Y = models.FloatField()
     uniqueID = models.CharField(max_length=255)
@@ -42,3 +45,5 @@ class Squirrel(models.Model):
     class Meta:
         verbose_name_plural = "Squirrel"
 
+    # def __str__(self):
+    #     return self.uniqueID

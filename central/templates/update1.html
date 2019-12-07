@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- 引入jQuery -->
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- 引入 Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <title>Update Sightings</title>
+</head>
+<body>
+
+<div class="container">
+    <form action="/add" method="post" role="form">
+        <div class="form-group">
+            <label class="control-label">loc_X:&nbsp </label>
+            <input class="form-control" type="text" name="loc_X" value={{ data.loc_X }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">loc_Y:&nbsp </label>
+            <input class="form-control" type="text" name="loc_Y" value={{ data.loc_Y }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">uniqueID:&nbsp </label>
+            <input class="form-control" type="text" name="uniqueID" value={{ data.uniqueID }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectare:&nbsp </label>
+            <input class="form-control" type="text" name="hectare" value={{ data.hectare }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">shift:&nbsp </label>
+            <input class="form-control" type="text" name="shift" value={{ data.shift }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">date:&nbsp </label>
+            <input class="form-control" type="text" name="date" value={{ data.date }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectareNum:&nbsp </label>
+            <input class="form-control" type="text" name="hectareNum" value={{ data.hectareNum }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">age:&nbsp </label>
+            <input class="form-control" type="text" name="age" value={{ data.age }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">primaryColor:&nbsp </label>
+            <input class="form-control" type="text" name="primaryColor" value={{ data.primaryColor }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">highlightColor:&nbsp </label>
+            <input class="form-control" type="text" name="highlightColor" value={{ data.highlightColor }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">combiColor:&nbsp </label>
+            <input class="form-control" type="text" name="combiColor" value={{ data.combiColor }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">colorNotes:&nbsp </label>
+            <input class="form-control" type="text" name="colorNotes" value={{ data.colorNotes }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">location:&nbsp </label>
+            <input class="form-control" type="text" name="location" value={{ data.location }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">measurement:&nbsp </label>
+            <input class="form-control" type="text" name="measurement" value={{ data.measurement }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">specificLocation:&nbsp </label>
+            <input class="form-control" type="text" name="specificLocation" value={{ data.specificLocation }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">running:&nbsp </label>
+            <input class="form-control" type="text" name="running" value={{ data.running }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">chasing:&nbsp </label>
+            <input class="form-control" type="text" name="chasing" value={{ data.chasing }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">climbing:&nbsp </label>
+            <input class="form-control" type="text" name="climbing" value={{ data.climbing }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">eating:&nbsp </label>
+            <input class="form-control" type="text" name="eating" value={{ data.eating }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">foraging:&nbsp </label>
+            <input class="form-control" type="text" name="foraging" value={{ data.foraging }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">otherActivities:&nbsp </label>
+            <input class="form-control" type="text" name="otherActivities" value={{ data.otherActivities }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">kuks:&nbsp </label>
+            <input class="form-control" type="text" name="kuks" value={{ data.kuks }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">quaas:&nbsp </label>
+            <input class="form-control" type="text" name="quaas" value={{ data.quaas }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">moans:&nbsp </label>
+            <input class="form-control" type="text" name="moans" value={{ data.moans }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailFlags:&nbsp </label>
+            <input class="form-control" type="text" name="tailFlags" value={{ data.tailFlags }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailTwitches:&nbsp </label>
+            <input class="form-control" type="text" name="tailTwitches" value={{ data.tailTwitches }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">approaches:&nbsp </label>
+            <input class="form-control" type="text" name="approaches" value={{ data.approaches }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">indifferent:&nbsp </label>
+            <input class="form-control" type="text" name="indifferent" value={{ data.indifferent }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">runsFrom:&nbsp </label>
+            <input class="form-control" type="text" name="runsFrom" value={{ data.runsFrom }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">otherInteractions:&nbsp </label>
+            <input class="form-control" type="text" name="otherInteractions" value={{ data.otherInteractions }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">latLong:&nbsp </label>
+            <input class="form-control" type="text" name="latLong" value={{ data.latLong }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">zipcodes:&nbsp </label>
+            <input class="form-control" type="text" name="zipcodes" value={{ data.zipcodes }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">communityDistricts:&nbsp </label>
+            <input class="form-control" type="text" name="communityDistricts" value={{ data.communityDistricts }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">boroughBoundaries:&nbsp </label>
+            <input class="form-control" type="text" name="boroughBoundaries" value={{ data.boroughBoundaries }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">cityCouncilDistricts:&nbsp </label>
+            <input class="form-control" type="text" name="cityCouncilDistricts" value={{ data.cityCouncilDistricts }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">policePrecincts:&nbsp </label>
+            <input class="form-control" type="text" name="policePrecincts" value={{ data.policePrecincts }}>
+        </div>
+
+        <input type="submit" value=Save" class="btn btn-default "/>
+
+
+    </form>
+</div>
+</body>
+</html>
