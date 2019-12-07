@@ -43,6 +43,7 @@ We also implemented query by uniqueID.
 * [Jquery](https://jquery.com) - 3.4.1 -Javascript Library
 * [BootstrapValidator](http://bootstrapvalidator.votintsev.ru/) v0.5.2 Used to validate from fields
 * [SQlite](https://www.sqlite.org/) 3.30.0 Database
+* [Django Leaflet](https://django-leaflet.readthedocs.io/en/latest/) - Used to generate map views
 
 ## Authors
 
