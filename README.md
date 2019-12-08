@@ -8,6 +8,9 @@
 **UNIs**: [yg2689, ys3292]
 **Section:** 001
 
+## Link to the Server Running Our Application
+https://squirrel-261301.appspot.com/sightings
+
 ## What we've implemented
 
 ### Management commands
