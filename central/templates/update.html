@@ -1,0 +1,463 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bootstrap-validator/bootstrapValidator.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-validator/bootstrapValidator.js' %}"></script>
+
+    <title>Update Sightings</title>
+    <script>
+        $(document).ready(function () {
+            $('#defaultForm').bootstrapValidator({
+                message: 'This value is not valid',
+                excluded: ':disabled',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    loc_X: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+
+                        }
+                    },
+                    loc_Y: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+                        }
+                    },
+                    hectare: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp:{
+                                regexp: /^\d{2}[A-Z]+$/,
+                                message: 'Hectare can only contain 2 numbers followed with an alphabet'
+                            },
+                        }
+                    },
+                    shift: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            }
+                        },
+                        regexp: {
+                                regexp: /^(AM|PM)+$/,
+                                message: 'Can only be AM or PM'
+                            }
+                    },
+                    date: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty',
+                            },
+                            regexp: {
+                                regexp: /^[0,1]\d[0-3]\d{5}$/,
+                                message: 'Date format : MMDDYYYY'
+                            }
+                        }
+                    },
+                    hectareNum: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            numeric:{
+                                message: 'Can only be numeric '
+                            },
+                        }
+                    },
+                    age: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^(Adult|Juvenile)+$/,
+                                message: 'Can only be Adult or Juvenile'
+                            }
+                        }
+                    },
+                    primaryColor: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^(Gray|Cinnamon|Black)+$/,
+                                message: 'Can only be Gray or Cinnamon or Black'
+                            }
+                        }
+                    },
+                    highlightColor: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^[a-zA-Z,]+$/,
+                                message: 'Can only consist of words, separated with comma'
+                            }
+                        }
+                    },
+                    combiColor: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^[a-zA-Z,+]+$/,
+                                message: 'Can only consist of words, separated with comma or +'
+                            },
+                        }
+                    },
+                    location: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^(Ground Plane|Above Ground)+$/,
+                                message: 'Can only be Ground Plane or Above Ground'
+                            }
+                        }
+                    },
+                    measurement: {
+                        validators: {
+                            regexp: {
+                                regexp:  /^(FALSE|[0-9])+$/,
+                                message: 'Can only consist of FALSE or a number'
+                            }
+                        }
+                    },
+                    running: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    chasing: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    climbing: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    eating: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    foraging: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    kuks: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    quaas: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    moans: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    tailFlags: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    tailTwitches: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    approaches: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    indifferent: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },
+                    runsFrom: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Must not be empty'
+                            },
+                            regexp: {
+                                regexp:  /^(FALSE|TRUE|false|true)+$/,
+                                message: 'Can only be TRUE or FALSE'
+                            }
+                        }
+                    },         
+                }
+            }).on('success.form.bv', function (e) {
+                console.log(e);              
+            });
+        });
+
+    $(function() {
+            $('#sub').on('click', function(){
+                var confirmation = confirm("Are you sure you want to submit?");
+                if (confirmation) {
+                    let hectare = document.getElementById('test1').value;
+                    let shift = document.getElementById('test2').value;
+                    let date = document.getElementById('test3').value;
+                    let hectareNum = document.getElementById('test4').value;
+                    if (hectare.charAt(0) == '0') {
+                        hectare = hectare.slice(1)
+                    }
+                    date = date.slice(0,4)
+                    if (hectareNum.length == 2) {
+                        hectareNum = hectareNum
+                    }
+                    else {
+                        hectareNum = '0' + hectareNum
+                    }
+                    let object_id = hectare + '-' + shift + '-' + date + '-' + hectareNum;
+                    alert(object_id);
+                    let url1 = 'sightings/'+object_id+'/';
+                    $('#defaultForm').bootstrapValidator('validate');
+                    if ($('#defaultForm').data("bootstrapValidator").isValid()) {
+                    $.ajax({
+                        url: url1,
+                        data: $('#defaultForm').serialize(),
+                        type: "POST",
+                        dataType: "json",
+                        success: function(result){
+                            if (result.code==2){
+                                alert('update success');
+                                window.location="/sightings",true;
+                            }
+                        }
+                    })}
+                    else {
+                        alert('Something wrong with your input, please check again!')
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <form role="form" id="defaultForm">
+        <div class="form-group">
+            <label class="control-label">loc_X:&nbsp </label>
+            <input class="form-control" type="text" name="loc_X" value={{ data.loc_X }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">loc_Y:&nbsp </label>
+            <input class="form-control" type="text" name="loc_Y" value={{ data.loc_Y }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectare:&nbsp </label>
+            <input class="form-control" type="text" name="hectare" value={{ data.hectare }} id='test1'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">shift:&nbsp </label>
+            <input class="form-control" type="text" name="shift" value={{ data.shift }} id='test2'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">date:&nbsp </label>
+            <input class="form-control" type="text" name="date" value={{ data.date }} id='test3'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">hectareNum:&nbsp </label>
+            <input class="form-control" type="text" name="hectareNum" value={{ data.hectareNum }} id='test4'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">age:&nbsp </label>
+            <input class="form-control" type="text" name="age" value={{ data.age }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">primaryColor:&nbsp </label>
+            <input class="form-control" type="text" name="primaryColor" value={{ data.primaryColor }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">highlightColor:&nbsp </label>
+            <input class="form-control" type="text" name="highlightColor" value={{ data.highlightColor }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">combiColor:&nbsp </label>
+            <input class="form-control" type="text" name="combiColor" value='{{ data.combiColor }}'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">colorNotes:&nbsp </label>
+            <input class="form-control" type="text" name="colorNotes" value='{{ data.colorNotes }}'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">location:&nbsp </label>
+            <input class="form-control" type="text" name="location" value='{{ data.location }}'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">measurement:&nbsp </label>
+            <input class="form-control" type="text" name="measurement" value={{ data.measurement }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">specificLocation:&nbsp </label>
+            <input class="form-control" type="text" name="specificLocation" value={{ data.specificLocation }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">running:&nbsp </label>
+            <input class="form-control" type="text" name="running" value={{ data.running }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">chasing:&nbsp </label>
+            <input class="form-control" type="text" name="chasing" value={{ data.chasing }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">climbing:&nbsp </label>
+            <input class="form-control" type="text" name="climbing" value={{ data.climbing }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">eating:&nbsp </label>
+            <input class="form-control" type="text" name="eating" value={{ data.eating }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">foraging:&nbsp </label>
+            <input class="form-control" type="text" name="foraging" value={{ data.foraging }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">otherActivities:&nbsp </label>
+            <input class="form-control" type="text" name="otherActivities" value='{{ data.otherActivities }}'>
+        </div>
+        <div class="form-group">
+            <label class="control-label">kuks:&nbsp </label>
+            <input class="form-control" type="text" name="kuks" value={{ data.kuks }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">quaas:&nbsp </label>
+            <input class="form-control" type="text" name="quaas" value={{ data.quaas }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">moans:&nbsp </label>
+            <input class="form-control" type="text" name="moans" value={{ data.moans }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailFlags:&nbsp </label>
+            <input class="form-control" type="text" name="tailFlags" value={{ data.tailFlags }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">tailTwitches:&nbsp </label>
+            <input class="form-control" type="text" name="tailTwitches" value={{ data.tailTwitches }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">approaches:&nbsp </label>
+            <input class="form-control" type="text" name="approaches" value={{ data.approaches }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">indifferent:&nbsp </label>
+            <input class="form-control" type="text" name="indifferent" value={{ data.indifferent }}>
+        </div>
+        <div class="form-group">
+            <label class="control-label">runsFrom:&nbsp </label>
+            <input class="form-control" type="text" name="runsFrom" value={{ data.runsFrom }}>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="otherInteractions" value={{ data.otherInteractions }}>
+            <input type='hidden' name="tempID" value = {{ data.uniqueID}}>
+        </div>
+        <input type="reset" value="Submit" class="btn btn-default " id="sub">
+
+
+    </form>
+</div>
+</body>
+</html>
