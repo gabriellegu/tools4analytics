@@ -9,13 +9,14 @@
 **Section:** 001
 
 ## Link to the Server Running Our Application
-https://squirrel-261301.appspot.com/sightings
+PLEASE DO NOT USE HTTPS, otherwise delete and update will not work properly.
+http://squirrel-261301.appspot.com/sightings
 
 ## What we've implemented
 
 ### Management commands
 
-We have implemented the management commands of importing CSV file and exporting to CSV file.
+We have implemented the management commands of importing CSV file and exporting to CSV file.(command line only)
 
 Import:
 ```
