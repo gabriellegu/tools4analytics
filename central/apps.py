@@ -7,3 +7,4 @@ class CentralConfig(AppConfig):
 
 class MapConfig(AppConfig):
     name = 'map'
+

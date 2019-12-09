@@ -25,7 +25,7 @@
 				   dataType:"json",
 				   success: function(result){
 						if(result.code==2){
-							window.location.href="/sightings/update?uniqueID="+data_object_id;
+							window.location.href="update?uniqueID="+data_object_id;
 					   }
 				   },
 				   error: function(result){
@@ -79,6 +79,10 @@
 																	   placeholder="Enter id"/>
 			<input type="submit" id="queryById" value="Search" class="btn btn-default "/>
 			&nbsp&nbsp<a href="/sightings/add" class="btn btn-primary">Add</a>
+			&nbsp&nbsp&nbsp
+			&nbsp&nbsp<a href="/sightings/stats" class="btn btn-primary">Stats</a>
+			&nbsp&nbsp&nbsp
+			&nbsp&nbsp<a href="/map" class="btn btn-primary">Map</a>
 			&nbsp&nbsp&nbsp
 		</div>
 	</form>
